@@ -15,7 +15,8 @@ php -v
 ```
 
 ### Set permissions of web root directory
-```sudo usermod -a -G apache ec2-user
+```
+sudo usermod -a -G apache ec2-user
 exit
 ssh ec2-user@ip
 groups
@@ -25,7 +26,8 @@ find /var/www -type f -exec sudo chmod 0664 {} \;
 ```
 
 ### Install git and composer
-```sudo yum install git
+```
+sudo yum install git
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 php composer-setup.php
@@ -34,12 +36,14 @@ sudo mv composer.phar /usr/local/bin/composer
 ```
 
 ### clone the application
-```cd /var/www/html/
+```
+cd /var/www/html/
 git clone {repo_url}
 cd {app}
 ```
 ### Install Dependency
-```sudo yum install openssl php-common php-mbstring php-json php-curl php-xml php-zip php-gd php-sodium
+```
+sudo yum install openssl php-common php-mbstring php-json php-curl php-xml php-zip php-gd php-sodium
 composer install
 ```
 ### copy env
@@ -49,9 +53,11 @@ nano .env
 php artisan migrate:status
 ```
 ### Virtual Host Setup
-```cd /etc/httpd/conf.d/
+```
+cd /etc/httpd/conf.d/
 sudo nano vhost.conf
 ```
+
 ```
 <VirtualHost *:80>
     DocumentRoot "/var/www/html/{app}/public"
@@ -64,10 +70,14 @@ sudo nano vhost.conf
     </Directory>
 </VirtualHost>
 ```
-```sudo service httpd restart```
+
+```
+sudo service httpd restart
+```
 
 ### Insatll SSL using Letsencrypt
-```sudo amazon-linux-extras enable php7.4
+```
+sudo amazon-linux-extras enable php7.4
 sudo yum clean metadata
 sudo yum install httpd mod_ssl -y
 sudo yum install php php-cli php-mysqlnd php-pdo php-common -y
