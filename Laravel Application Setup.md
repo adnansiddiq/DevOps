@@ -64,7 +64,7 @@ sudo nano vhost.conf
     ServerName app.dev
     <Directory "/var/www/html/{app}/public">
             AllowOverride All
-            Options +FollowSymLhtmlinks +Indexes
+            Options +FollowSymLinks +Indexes
             Order allow,deny
             Allow from all
     </Directory>
